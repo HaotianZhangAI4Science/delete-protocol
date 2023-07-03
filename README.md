@@ -10,7 +10,7 @@ This protocol is used for performing structural modification of ligands with Del
 
 Download the Delete and follow the guildline to build the surf_maker environment and delete environment.
 
-Scenario: if you have a target on which to design, and you have a prepared fragment. You can generate a series possible modifications using Delete. 
+Scenario: if you have a target on which to design, and you have a prepared fragment. You can generate a series possible modifications using Delete. The used checkpoint could be downloaded [here](https://doi.org/10.5281/zenodo.8104141). 
 
 ```python
 python gen_all_epoch_to_1_target.py
