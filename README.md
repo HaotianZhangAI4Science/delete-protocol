@@ -32,6 +32,8 @@ Then you would get a series of modified molecules.
 
 ### Expert Selection Visualization
 
+#### T-Map
+
 One way to visualize the generated molecules is by mapping them with the t-map, please refer to the following Git for implementation. The different color could be attributed to different properties. 
 
 ```python
@@ -43,16 +45,29 @@ https://github.com/HaotianZhangAI4Science/AI-Physics-DrugDiscovery/tree/main/che
 </div>
 
 
+#### Similarity Clustering
 
-Scaffold 
+You can use a similarity matrix to cluster molecules, and select several ones in each cluster. I have provided an example in the following repository. 
+
+```
+./clustering/molecules_cluster.ipynb
+```
+
+<div align=center>
+<img src="./clustering/cluster.png" width="50%" height="50%" alt="TOC" align=center />
+</div>
+
+
+
+#### Scaffold Analysis
+
+ChemBio   ` https://chembioserver.vi-seem.eu/Dendrogram.php`
 
 Scaffold Hunter. `https://scaffoldhunter.sourceforge.net/`
 
 chemaxon ` https://chemaxon.com/discovery-tools`
 
 chemmine  ` http://chemmine.ucr.edu/about/`
-
-ChemBio   ` https://chembioserver.vi-seem.eu/Dendrogram.php`
 
 ChemBio is my first choice since it is quite easy to use. 
 
