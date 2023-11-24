@@ -62,6 +62,8 @@ To be continued.
 
 ### FEP
 
+[OpenFreeEnergy/Lomap: Alchemical mutation scoring map (github.com)](https://github.com/OpenFreeEnergy/Lomap#lomap)
+
 ### Expert Selection Visualization
 
 #### T-Map
