@@ -18,7 +18,7 @@ python gen_all_epoch_to_1_target.py
 
 Then you would get a series of modified molecules. 
 
-## Predicted Proteins
+## Fix Proteins (Optional)
 
 For a number of reasons, some proteins may not have the experimental conformations, such as parp7. To use Delete for this case, you need to predict its conformation with AlphaFold2 or homology modeling. 
 
@@ -58,6 +58,8 @@ To be continued.
 
 ### Docking 
 
+You can use a series of docking software, where the scripts are stored in the `./docking`
+
 ### MM-PBSA
 
 ### FEP
@@ -92,6 +94,13 @@ You can use a similarity matrix to cluster molecules, and select several ones in
 </div>
 
 
+#### Make PDF analysis. 
+
+You can use the `./clustering/sort_by_docking.py` or `./clustering/sort_by_similarity.ipynb` to sort the molecules into PDF format for experts' review. The generated example are outlined as follows:
+
+<div align=center>
+<img src="./clustering/sorted.png" width="70%" height="70%" alt="TOC" align=center />
+</div>
 
 #### Scaffold Analysis
 
@@ -106,4 +115,40 @@ chemmine  ` http://chemmine.ucr.edu/about/`
 ChemBio is my first choice since it is quite easy to use. 
 
 
+
+### Select Chemicals from Libraries. 
+
+Synthesizing designed molecules is not available for some researchers. Therefore, we provide the script to select the molecule most similar to the generated one. This protocol indeed has some advantages, including securing the drug-like properties of ligands, but it sacrifices the chemical space exploration abilities, sometimes leading to the missing of hit compounds. 
+
+#### Download Libraries
+
+There are plenty of choices of ligand libraries, such as CHEMBL, ZINC, ChemDiv, and Specs. You should download them from the original resources in the `./library`.
+
+**ChemDiv**: ChemDiv contains several .sdf files,  including `DC01_400000.sdf`, `DC02_400000.sdf`, `DC03_332268.sdf`, `IC_136982.sdf`, and `NC_292464.sdf`. You can use obabel to merge them together. 
+
+```shell
+obabel DC01_400000.sdf, DC02_400000.sdf, DC03_332268.sdf, IC_136982.sdf, NC_292464.sdf -O chemdiv.sdf
+```
+
+**Specs**: Specs only has one file, whereas mine is named `Specs_ExAcD_Aug_2020.sdf`. 
+
+**ZINC**: Zinc needs you to download the files, where the command is obtained from the [ZINC Website](https://zinc.docking.org/). I have prepared a download.sh makingscript in the `./library/Zinc_download.ipynb`. 
+
+#### Search the Most Similar Molecules 
+
+Our script employs commercial software, OpenEye, for fast-searching compound libraries. 
+
+```shell
+# Make fingerprints of libraries. Here we show the chemdiv example. Try other libraries based on your own needs. 
+python ./openeye/makefastfp.py -in ./library/chemdiv.sdf -fpdb ./library/chemdiv.fpbin
+
+# Once you obtain the fingerprint database, you can search the query mol using the following script. 
+python ./openeye/searchfastfp.py -fpdb ./library/chemdiv.fpbin -molfname ./library/chemdiv.sdf -query ./library/query.sdf -out hits.sdf -memorytype in-memory
+```
+
+#### Search the Molecule Containing the Query Structure
+
+```python
+python ./openeye/search_substructure.py --query_sdf query.sdf --library ./library/chemdiv.sdf --save_file ./hit.sdf 
+```
 
