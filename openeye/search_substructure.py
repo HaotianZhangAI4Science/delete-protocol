@@ -6,9 +6,9 @@ oechem.OEThrow.SetLevel(oechem.OEErrorLevel_Error)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--query_sdf', type=str, default='./configs/sample.yml')
-    parser.add_argument('--library', type=str, default='./configs/sample.yml')
-    parser.add_argument('--save_file', type=str, default=None)
+    parser.add_argument('--query_sdf', type=str, default='./query.sdf')
+    parser.add_argument('--library', type=str, default='./library/chemdiv.sdf')
+    parser.add_argument('--saved_file', type=str, default=None)
     parser.add_argument('--aliphatic', action='store')
     parser.add_argument('--bondtop', action='store')
     args = parser.parse_args()
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     query_name = osp.basename(args.query_sdf).split('.')[0]
     library_name = osp.basename(args.library).split('.')[0]
 
-    if args.save_file is None:
+    if args.saved_file is None:
         saved_file = f'{query_name}_{library_name}_searched.sdf'
     else:
         saved_file = args.saved_file

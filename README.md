@@ -140,15 +140,45 @@ Our script employs commercial software, OpenEye, for fast-searching compound lib
 
 ```shell
 # Make fingerprints of libraries. Here we show the chemdiv example. Try other libraries based on your own needs. 
-python ./openeye/makefastfp.py -in ./library/chemdiv.sdf -fpdb ./library/chemdiv.fpbin
+python ./openeye/makefastfp.py -in ./library/Specs_ExAcD_Aug_2020.sdf -fpdb ./library/Specs_ExAcD_Aug_2020.fpbin
 
-# Once you obtain the fingerprint database, you can search the query mol using the following script. 
-python ./openeye/searchfastfp.py -fpdb ./library/chemdiv.fpbin -molfname ./library/chemdiv.sdf -query ./library/query.sdf -out hits.sdf -memorytype in-memory
+# Once you obtain the fingerprint database (fpbin), you can search the query mol using the following script. 
+python ./openeye/search_similarity.py --query_sdf ./frag2.sdf --molfname ./library/Specs_ExAcD_Aug_2020.sdf --fpdbfname ./library/Specs_ExAcD_Aug_2020.fpbin --saved_sdf ./case_examples/sim_searched.sdf --num_return 50
 ```
+
+<div align=center>
+<img src="./openeye/case_examples/sim_searched.png" width="70%" height="70%" alt="TOC" align=center />
+</div>
 
 #### Search the Molecule Containing the Query Structure
 
+There are three ways in 
+
 ```python
-python ./openeye/search_substructure.py --query_sdf query.sdf --library ./library/chemdiv.sdf --save_file ./hit.sdf 
+python ./openeye/search_substructure.py --query_sdf frag2.sdf --library ./library/Specs_ExAcD_Aug_2020.sdf --saved_file ./hit.sdf 
 ```
+
+<div align=center>
+<img src="./openeye/case_examples/vanilla_core.png" width="70%" height="70%" alt="TOC" align=center />
+</div>
+
+
+
+```python
+python ./openeye/search_substructure.py --query_sdf frag2.sdf --library ./library/Specs_ExAcD_Aug_2020.sdf --saved_file ./hit.sdf --aliphatic yes
+```
+
+<div align=center>
+<img src="./openeye/case_examples/aliphatic_core.png" width="70%" height="70%" alt="TOC" align=center />
+</div>
+
+
+
+```python
+python ./openeye/search_substructure.py --query_sdf frag2.sdf --library ./library/Specs_ExAcD_Aug_2020.sdf --saved_file ./hit.sdf --bondtop yes
+```
+
+<div align=center>
+<img src="./openeye/case_examples/bondtop_core.png" width="70%" height="70%" alt="TOC" align=center />
+</div>
 
