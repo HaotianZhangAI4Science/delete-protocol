@@ -52,6 +52,21 @@ To be continued.
 
 ## Filter the molecules 
 
+### 3D Filter 
+
+Filter generated fragments according to the given fragments. Sometimes, delete will generate redundant fragments beyond the given attachment points. Therefore, I write a script to filter this problem. Basically, it involves frag-mol atom mapping, and generated fragment attribution with BFS search. 
+
+```python
+from filter.editmol_3d import read_sdf, filter_genmol_ac_attach
+gen_mol = read_sdf('./fgfr3_example.sdf')[0]
+frag = read_sdf('./fgfr3_frag.sdf')[0]
+filtered_mol = filter_genmol_ac_attach(gen_mol, frag, [6])
+```
+
+<div align=center>
+<img src="./filter/filter.png" width="100%" height="100%" alt="TOC" align=center />
+</div>
+
 ### QSAR
 
 ### Mol Prop
@@ -191,4 +206,3 @@ python ./openeye/search_substructure.py --query_sdf frag2.sdf --library ./librar
 <div align=center>
 <img src="./openeye/case_examples/bondtop_core.png" width="70%" height="70%" alt="TOC" align=center />
 </div>
-
