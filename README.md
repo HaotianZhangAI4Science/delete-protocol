@@ -1,7 +1,5 @@
 This protocol is used for performing structural modification of ligands with Delete method. 
 
-
-
 ## Define Replacement
 
 ### Discover patterns with pharmacophore modeling. 
